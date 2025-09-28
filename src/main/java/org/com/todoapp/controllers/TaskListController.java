@@ -1,7 +1,6 @@
 package org.com.todoapp.controllers;
 
 import org.com.todoapp.dto.TaskListDto;
-import org.com.todoapp.services.TaskListService;
 import org.com.todoapp.services.TaskListServiceImpl;
 import org.com.todoapp.utils.TaskListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,6 @@ public class TaskListController {
     private TaskListServiceImpl taskListService;
     @Autowired
     private  TaskListMapper taskListMapper;
-
-//    @Autowired
-//    public TaskListController(TaskListServiceImpl taskListService, TaskListMapper taskListMapper) {
-//        this.taskListService = taskListService;
-//        this.taskListMapper = taskListMapper;
-//    }
 
     @GetMapping
     public List<TaskListDto> listTaskLists() {
@@ -43,5 +36,15 @@ public class TaskListController {
         return taskListService.findById(id)
                 .map(taskListMapper::toDto);
 
+    }
+
+    @PutMapping(path = "/{task_lists_id}")
+    public TaskListDto updateTaskList(TaskListDto taskListDto, String id) {
+        return taskListMapper.toDto(taskListService.updateTaskList(taskListMapper.fromDto(taskListDto), id));
+    }
+
+    @DeleteMapping(path = "/{task_lists_id}")
+    public void deleteTaskList(String id) {
+        taskListService.deleteTaskList(id);
     }
 }

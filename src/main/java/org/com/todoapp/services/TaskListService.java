@@ -12,4 +12,5 @@ public interface TaskListService {
     TaskList createTaskList(TaskList taskList);
     Optional<TaskList> findById(String id);
     TaskList updateTaskList(TaskList taskList, String id);
+    void deleteTaskList(String id);
 }

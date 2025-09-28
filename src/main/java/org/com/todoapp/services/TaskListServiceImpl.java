@@ -59,5 +59,10 @@ public class TaskListServiceImpl implements TaskListService {
 
     }
 
+    @Override
+    public void deleteTaskList(String id) {
+        taskListRepository.deleteById(id);
+    }
+
 
 }
